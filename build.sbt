@@ -11,7 +11,6 @@ lazy val root = (project in file("."))
       "mysql" % "mysql-connector-java" % "8.0.31",
       "org.scalactic" %% "scalactic" % "3.2.18" % Test,
       "org.scalatest" %% "scalatest" % "3.2.18" % Test,
-      "com.dimafeng" %% "testcontainers-scala-scalatest" % "0.41.3" % Test,
       "com.dimafeng" %% "testcontainers-scala-mysql" % "0.41.3" % Test,
       "ch.qos.logback" % "logback-classic" % "1.1.3" % Runtime
     )
