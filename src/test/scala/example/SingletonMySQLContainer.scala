@@ -18,7 +18,6 @@ object SingletonMySQLContainer {
     val ct = containerDef.createContainer()
     ct.container.setExtraHosts(List("host.docker.internal:host-gateway").asJava)
     ct.container.withConfigurationOverride("mysql_conf")
-    ct.container.withInitScript("fixtures/setup.sql")
     ct.start()
     ct
   }
