@@ -14,12 +14,12 @@ object SingletonMySQLContainer:
     password = ""
   )
 
-  val mySQLContainer: MySQLContainer =
+  lazy val mySQLContainer: MySQLContainer =
     val ct = containerDef.createContainer()
     ct.container.setExtraHosts(List("host.docker.internal:host-gateway").asJava)
     ct.container.withConfigurationOverride("mysql_conf")
     ct.start()
     ct
 
-  private val port = mySQLContainer.container.getMappedPort(3306)
-  lazy val url: String = s"${mySQLContainer.container.getHost}:${port}"
+  lazy val url: String =
+    s"${mySQLContainer.container.getHost}:${mySQLContainer.container.getMappedPort(3306)}"

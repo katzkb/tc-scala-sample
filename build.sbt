@@ -20,7 +20,8 @@ lazy val root = (project in file("."))
       "org.scalatest" %% "scalatest" % "3.2.18" % Test,
       "com.dimafeng" %% "testcontainers-scala-mysql" % "0.41.3" % Test,
       "ch.qos.logback" % "logback-classic" % "1.1.3" % Runtime
-    )
+    ),
+    Test / parallelExecution := false
   )
 
 // See https://www.scala-sbt.org/1.x/docs/Using-Sonatype.html for instructions on how to publish to Sonatype.

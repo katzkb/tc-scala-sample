@@ -1,7 +1,9 @@
 package example
 
+import cats.effect.{IO, Resource}
 import com.dimafeng.testcontainers.MySQLContainer
-import example.db.Database.transactor
+import doobie.util.transactor
+import example.db.Database
 import org.scalatest.BeforeAndAfterAll
 import org.scalatest.freespec.AnyFreeSpec
 import org.testcontainers.containers.JdbcDatabaseContainer
@@ -15,17 +17,19 @@ trait SingletonMySQLContainerSpec extends AnyFreeSpec with BeforeAndAfterAll:
 
   final private val jdbcContainer: JdbcDatabaseContainer[Nothing] =
     mysqlContainer.container.asInstanceOf[JdbcDatabaseContainer[Nothing]]
+
   final private val databaseDelegate: JdbcDatabaseDelegate =
     new JdbcDatabaseDelegate(jdbcContainer, "")
 
   val fixturePathList: Seq[String]
 
-  val customTransactor = transactor(
-    "com.mysql.cj.jdbc.Driver",
-    s"jdbc:mysql://${SingletonMySQLContainer.url}?useSSL=false",
-    "root",
-    ""
-  )
+  val customTransactor: Resource[IO, transactor.Transactor[IO]] =
+    Database.transactor(
+      "com.mysql.cj.jdbc.Driver",
+      s"jdbc:mysql://${SingletonMySQLContainer.url}?useSSL=false",
+      "root",
+      ""
+    )
 
   override def beforeAll(): Unit =
     super.beforeAll()
@@ -33,5 +37,3 @@ trait SingletonMySQLContainerSpec extends AnyFreeSpec with BeforeAndAfterAll:
     fixturePathList.foreach { path =>
       ScriptUtils.runInitScript(databaseDelegate, path)
     }
-
-  val url = SingletonMySQLContainer.url
