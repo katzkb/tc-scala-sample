@@ -8,7 +8,7 @@ import org.testcontainers.containers.JdbcDatabaseContainer
 import org.testcontainers.ext.ScriptUtils
 import org.testcontainers.jdbc.JdbcDatabaseDelegate
 
-trait SingletonMySQLContainerSpec extends AnyFreeSpec with BeforeAndAfterAll {
+trait SingletonMySQLContainerSpec extends AnyFreeSpec with BeforeAndAfterAll:
 
   final def mysqlContainer: MySQLContainer =
     SingletonMySQLContainer.mySQLContainer
@@ -27,13 +27,11 @@ trait SingletonMySQLContainerSpec extends AnyFreeSpec with BeforeAndAfterAll {
     ""
   )
 
-  override def beforeAll(): Unit = {
+  override def beforeAll(): Unit =
     super.beforeAll()
     ScriptUtils.runInitScript(databaseDelegate, "fixtures/cleanup.sql")
     fixturePathList.foreach { path =>
       ScriptUtils.runInitScript(databaseDelegate, path)
     }
-  }
 
   val url = SingletonMySQLContainer.url
-}

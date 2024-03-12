@@ -6,7 +6,7 @@ import doobie.util.ExecutionContexts
 import doobie.util.transactor.Transactor
 import doobie.util.meta.Meta
 
-object Database {
+object Database:
 
   def transactor(
       driverClassName: String,
@@ -14,7 +14,7 @@ object Database {
       user: String,
       pass: String
   ): Resource[IO, Transactor[IO]] =
-    for {
+    for
       ce <- ExecutionContexts.fixedThreadPool[IO](32)
       xa <- HikariTransactor.newHikariTransactor[IO](
         driverClassName,
@@ -23,7 +23,7 @@ object Database {
         pass,
         ce
       )
-    } yield xa
+    yield xa
 
   implicit val CustomMeta: Meta[java.time.LocalDateTime] =
     Meta.Advanced.other[java.time.LocalDateTime]("TIMESTAMP")
@@ -35,5 +35,3 @@ object Database {
       "root",
       ""
     )
-
-}

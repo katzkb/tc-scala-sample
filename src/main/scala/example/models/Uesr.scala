@@ -1,9 +1,9 @@
 package example.models
 
-import doobie._
-import doobie.implicits.javatimedrivernative._
-import doobie.util.Read._
-import cats.syntax.apply._
+import doobie.*
+import doobie.implicits.javatimedrivernative.*
+import doobie.util.Read.*
+import cats.syntax.apply.*
 import java.time.LocalDateTime
 
 case class User(
@@ -13,9 +13,8 @@ case class User(
     createdAt: LocalDateTime
 )
 
-object User {
+object User:
   implicit val UserMeta: Read[User] =
     (Read[Long], Read[String], Read[LocalDateTime], Read[LocalDateTime]).mapN(
       User.apply
     )
-}

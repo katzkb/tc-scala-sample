@@ -1,9 +1,9 @@
 //package example.db
 //
 //import doobie.Fragment
-//import doobie.implicits._
+//import doobie.implicits.*
 //
-//object Tables {
+//object Tables:
 //
 //  val createUserTableQuery: Fragment =
 //    sql"""
@@ -14,5 +14,3 @@
 //        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 //      )
 //    """
-//
-//}
