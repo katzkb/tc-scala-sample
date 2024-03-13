@@ -20,6 +20,7 @@ lazy val root = (project in file("."))
       "org.scalatest" %% "scalatest" % "3.2.18" % Test,
       "ch.qos.logback" % "logback-classic" % "1.4.14" % Runtime,
       "com.dimafeng" %% "testcontainers-scala-mysql" % "0.41.3" % Test,
+      "com.dimafeng" %% "testcontainers-scala-scalatest" % "0.41.3" % Test,
     ),
     Test / parallelExecution := false
   )
