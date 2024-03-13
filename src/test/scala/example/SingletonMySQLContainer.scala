@@ -20,6 +20,3 @@ object SingletonMySQLContainer:
     ct.container.withConfigurationOverride("mysql_conf")
     ct.start()
     ct
-
-  lazy val url: String =
-    s"${mysqlContainer.container.getHost}:${mysqlContainer.container.getMappedPort(3306)}"

@@ -11,22 +11,22 @@ import org.testcontainers.ext.ScriptUtils
 import org.testcontainers.jdbc.JdbcDatabaseDelegate
 
 trait SingletonMySQLContainerSpec extends AnyFreeSpec with BeforeAndAfterAll:
+  
+  val fixturePathList: Seq[String]
 
   final def mysqlContainer: MySQLContainer =
     SingletonMySQLContainer.mysqlContainer
 
-  final private val jdbcContainer: JdbcDatabaseContainer[Nothing] =
+  private val jdbcContainer: JdbcDatabaseContainer[Nothing] =
     mysqlContainer.container.asInstanceOf[JdbcDatabaseContainer[Nothing]]
 
-  final private val databaseDelegate: JdbcDatabaseDelegate =
+  private val databaseDelegate: JdbcDatabaseDelegate =
     new JdbcDatabaseDelegate(jdbcContainer, "")
 
-  val fixturePathList: Seq[String]
-
-  val customTransactor: Resource[IO, transactor.Transactor[IO]] =
+  final val customTransactor: Resource[IO, transactor.Transactor[IO]] =
     Database.transactor(
       "com.mysql.cj.jdbc.Driver",
-      s"jdbc:mysql://${SingletonMySQLContainer.url}?useSSL=false",
+      s"${jdbcContainer.getJdbcUrl}?useSSL=false",
       "root",
       ""
     )
