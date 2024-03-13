@@ -13,7 +13,7 @@ import org.testcontainers.jdbc.JdbcDatabaseDelegate
 trait SingletonMySQLContainerSpec extends AnyFreeSpec with BeforeAndAfterAll:
 
   final def mysqlContainer: MySQLContainer =
-    SingletonMySQLContainer.mySQLContainer
+    SingletonMySQLContainer.mysqlContainer
 
   final private val jdbcContainer: JdbcDatabaseContainer[Nothing] =
     mysqlContainer.container.asInstanceOf[JdbcDatabaseContainer[Nothing]]
