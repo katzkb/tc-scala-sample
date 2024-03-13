@@ -17,6 +17,6 @@ class CompanyServiceSpec extends SingletonMySQLContainerSpec:
           for companies <- service.getAllCompanies.map(_.headOption)
           yield assert(companies.exists(_.name == "Example"))
       }
-      companyService.unsafeToCompletableFuture()
+      companyService.unsafeRunSync()
     }
   }

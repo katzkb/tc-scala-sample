@@ -16,6 +16,6 @@ class UserServiceSpec extends SingletonMySQLContainerSpec:
         for users <- service.getAllUsers.map(_.headOption)
         yield assert(users.exists(_.name == "Alice"))
       }
-      userService.unsafeToCompletableFuture()
+      userService.unsafeRunSync()
     }
   }
