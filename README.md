@@ -1,6 +1,6 @@
 # testcontainers-scala-sample
 
-This repository provides a sample project demonstrating how to speed up database testing in Scala 3 using `testcontainers-scala`.
+This repository provides a sample project demonstrating how to speed up database testing in Scala 3 using [testcontainers-scala](https://github.com/testcontainers/testcontainers-scala).
 
 ## How to run the tests
 
@@ -18,7 +18,7 @@ This repository provides a sample project demonstrating how to speed up database
 sbt test
 ```
 
-if you installed sdk-cli, you can run the following command:
+if you installed [sdkman](https://sdkman.io/), you can run the following command:
 
 ```bash
 sdk use java 21.0.2-amzn && sbt test
