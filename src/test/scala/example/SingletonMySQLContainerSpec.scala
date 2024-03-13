@@ -11,9 +11,11 @@ import org.testcontainers.ext.ScriptUtils
 import org.testcontainers.jdbc.JdbcDatabaseDelegate
 
 trait SingletonMySQLContainerSpec extends AnyFreeSpec with BeforeAndAfterAll:
-  
+
+  // テスト開始時に実行するSQLファイルのリスト
   val fixturePathList: Seq[String]
 
+  // シングルトンオブジェクトのコンテナを提供する
   final def mysqlContainer: MySQLContainer =
     SingletonMySQLContainer.mysqlContainer
 
@@ -33,7 +35,9 @@ trait SingletonMySQLContainerSpec extends AnyFreeSpec with BeforeAndAfterAll:
 
   override def beforeAll(): Unit =
     super.beforeAll()
+    // 各テストスイート実行前にDBを初期化する
     ScriptUtils.runInitScript(databaseDelegate, "fixtures/cleanup.sql")
+    // テストデータを投入する
     fixturePathList.foreach { path =>
       ScriptUtils.runInitScript(databaseDelegate, path)
     }

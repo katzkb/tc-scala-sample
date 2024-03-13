@@ -7,6 +7,7 @@ import scala.jdk.CollectionConverters.*
 
 object SingletonMySQLContainer:
 
+  // 接続に必要な情報
   val containerDef: MySQLContainer.Def = MySQLContainer.Def(
     dockerImageName = DockerImageName.parse("mysql:8.0.33"),
     databaseName = "test",
@@ -14,6 +15,7 @@ object SingletonMySQLContainer:
     password = ""
   )
 
+  // DBコンテナを作成して起動
   lazy val mysqlContainer: MySQLContainer =
     val ct = containerDef.createContainer()
     ct.container.setExtraHosts(List("host.docker.internal:host-gateway").asJava)
