@@ -16,10 +16,11 @@ lazy val root = (project in file("."))
       "org.tpolecat" %% "doobie-specs2" % doobieVersion % Test,
       "org.tpolecat" %% "doobie-scalatest" % doobieVersion % Test,
       "org.typelevel" %% "cats-effect" % catsEffectVersion,
+      "org.typelevel" %% "cats-effect-testing-scalatest" % "1.5.0" % Test,
       "org.scalactic" %% "scalactic" % "3.2.18" % Test,
       "org.scalatest" %% "scalatest" % "3.2.18" % Test,
       "ch.qos.logback" % "logback-classic" % "1.4.14" % Runtime,
-      "com.dimafeng" %% "testcontainers-scala-mysql" % "0.41.3" % Test,
+      "com.dimafeng" %% "testcontainers-scala-mysql" % "0.41.3" % Test
     ),
-    Test / fork := true,
+    Test / fork := true
   )

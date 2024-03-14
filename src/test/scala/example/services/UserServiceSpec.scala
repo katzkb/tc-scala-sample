@@ -1,7 +1,6 @@
 package example.services
 
 import example.SingletonMySQLContainerSpec
-import cats.effect.unsafe.implicits.global
 
 class UserServiceSpec extends SingletonMySQLContainerSpec:
 
@@ -12,10 +11,9 @@ class UserServiceSpec extends SingletonMySQLContainerSpec:
 
   "UserService" - {
     "Get an user" in {
-      val userService = UserService(Some(customTransactor)).use { service =>
+      UserService(Some(customTransactor)).use { service =>
         for users <- service.getAllUsers.map(_.headOption)
         yield assert(users.exists(_.name == "Alice"))
       }
-      userService.unsafeRunSync()
     }
   }
