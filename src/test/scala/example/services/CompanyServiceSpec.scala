@@ -11,10 +11,9 @@ class CompanyServiceSpec extends SingletonMySQLContainerSpec:
 
   "CompanyService" - {
     "Get an company" in {
-      CompanyService(Some(customTransactor)).use {
-        service =>
-          for companies <- service.getAllCompanies.map(_.headOption)
-          yield assert(companies.exists(_.name == "Example"))
+      CompanyService(Some(customTransactor)).use { service =>
+        for companies <- service.getAllCompanies.map(_.headOption)
+        yield assert(companies.exists(_.name == "Example"))
       }
     }
   }
