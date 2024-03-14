@@ -21,5 +21,5 @@ lazy val root = (project in file("."))
       "ch.qos.logback" % "logback-classic" % "1.4.14" % Runtime,
       "com.dimafeng" %% "testcontainers-scala-mysql" % "0.41.3" % Test,
     ),
-    Test / parallelExecution := false
+    Test / fork := true,
   )
