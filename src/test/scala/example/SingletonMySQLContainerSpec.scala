@@ -1,16 +1,17 @@
 package example
 
 import cats.effect.{IO, Resource}
+import cats.effect.testing.scalatest.AsyncIOSpec
 import com.dimafeng.testcontainers.MySQLContainer
 import doobie.util.transactor
 import example.db.Database
 import org.scalatest.BeforeAndAfterAll
-import org.scalatest.freespec.AnyFreeSpec
+import org.scalatest.freespec.AsyncFreeSpec
 import org.testcontainers.containers.JdbcDatabaseContainer
 import org.testcontainers.ext.ScriptUtils
 import org.testcontainers.jdbc.JdbcDatabaseDelegate
 
-trait SingletonMySQLContainerSpec extends AnyFreeSpec with BeforeAndAfterAll:
+trait SingletonMySQLContainerSpec extends AsyncFreeSpec with AsyncIOSpec with BeforeAndAfterAll:
 
   // テスト開始時に実行するSQLファイルのリスト
   val fixturePathList: Seq[String]
